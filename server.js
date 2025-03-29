@@ -7,7 +7,7 @@ const path = require('path');
 const app = express();
 app.set('trust proxy', true);
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 const allowedOrigins = ['https://solar.clution.se', 'https://solar.local'];
 // Move CORS middleware to top
@@ -31,27 +31,27 @@ const logRequest = (req, res, next) => {
   const logFile = path.join(__dirname, 'api-logs.txt');
   const realIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
-  // Spara starttid
+  // Save start time
   const startTime = process.hrtime();
 
   res.on('finish', () => {
-    // Beräkna hur lång tid requesten tog
+    // Calculate how long it took
     const diff = process.hrtime(startTime);
-    const durationMs = (diff[0] * 1e3 + diff[1] / 1e6).toFixed(3); // Omvandla till ms med 3 decimaler
+    const durationMs = (diff[0] * 1e3 + diff[1] / 1e6).toFixed(3); // 3 decimals
 
-    // Bygg loggmeddelande
+    // Build log message
     const logEntry = `${new Date().toISOString()} - ${req.method} ${
       req.url
     } - IP: ${realIp} - Origin: ${req.headers.origin || 'Unknown'} - Status: ${
       res.statusCode
     } - Duration: ${durationMs} ms\n`;
 
-    // Skriv till loggfil
+    // Write to logfile
     fs.appendFile(logFile, logEntry, (err) => {
       if (err) console.error('Could not write to logfile', err);
     });
 
-    console.log(logEntry.trim()); // Skriv ut i terminalen också
+    console.log(logEntry.trim());
   });
 
   next();
@@ -75,14 +75,14 @@ const authenticate = (req, res, next) => {
 };
 
 /* ROUTER */
-// favicon
+// Deal with lack of favicon
 app.get('/favicon.ico', (req, res) => {
   res.status(204).send();
 });
 
 // API-endpoint to get specific key
 app.get('/get-key', authenticate, (req, res) => {
-  const start = process.hrtime.bigint(); // Starta timer (nanosekunder)
+  const start = process.hrtime.bigint(); // Start timer (nanoseconds)
   let keyName, typeName;
 
   if (req.query.key) {
@@ -102,14 +102,10 @@ app.get('/get-key', authenticate, (req, res) => {
   if (!apiKey) {
     return res.status(404).json({ error: 'Key was not found!' });
   }
-  const end = process.hrtime.bigint(); // Slut tid (nanosekunder)
-  const duration = Number(end - start) / 1e6; // Omvandla till millisekunder
+  const end = process.hrtime.bigint(); // End time (nanoseconds)
+  const duration = Number(end - start) / 1e6; // Convert to milliseconds
   res.json({ apiKey, duration: duration.toFixed(4) });
 });
 
 // Start server
-/*
-ssh -p 2020 s82677@gkey.clution.se
-source /home/s82677/nodevenv/domains/gkey.clution.se/public_html/20/bin/activate && cd /home/s82677/domains/gkey.clution.se/public_html
-*/
 app.listen(() => console.log(`Server is running (on port ${PORT})`));
