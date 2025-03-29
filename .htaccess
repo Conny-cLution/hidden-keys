@@ -1,0 +1,7 @@
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/s82677/domains/gkey.clution.se/public_html"
+PassengerBaseURI "/"
+PassengerNodejs "/home/s82677/nodevenv/domains/gkey.clution.se/public_html/20/bin/node"
+PassengerAppType node
+PassengerStartupFile server.js
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
