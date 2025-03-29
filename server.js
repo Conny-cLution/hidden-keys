@@ -76,11 +76,6 @@ const authenticate = (req, res, next) => {
 };
 
 /* ROUTER */
-// Deal with lack of favicon
-app.get('/favicon.ico', (req, res) => {
-  res.status(204).send();
-});
-
 // API-endpoint to get specific key
 app.get('/get-key', authenticate, (req, res) => {
   const start = process.hrtime.bigint(); // Start timer (nanoseconds)
