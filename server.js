@@ -3,12 +3,13 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
-
 const app = express();
+// If the app runs behind a proxy (like Nginx, Heroku), this line must be added
 app.set('trust proxy', true);
 
 const PORT = process.env.PORT || 3000;
 // List of allowed origins
+// - These are my test origins and must be replaced with yours
 const allowedOrigins = ['https://solar.clution.se', 'https://solar.local'];
 // Move CORS middleware to top
 app.use(
