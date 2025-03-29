@@ -8,7 +8,7 @@ const app = express();
 app.set('trust proxy', true);
 
 const PORT = process.env.PORT || 3000;
-
+// List of allowed origins
 const allowedOrigins = ['https://solar.clution.se', 'https://solar.local'];
 // Move CORS middleware to top
 app.use(
@@ -107,5 +107,6 @@ app.get('/get-key', authenticate, (req, res) => {
   res.json({ apiKey, duration: duration.toFixed(4) });
 });
 
-// Start server
+// Start server.
+// You might have to specify PORT as a first argument
 app.listen(() => console.log(`Server is running (on port ${PORT})`));
