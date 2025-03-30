@@ -1,3 +1,4 @@
 .env
 api-logs.txt
 node_modules
+tmp
