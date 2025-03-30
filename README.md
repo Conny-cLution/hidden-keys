@@ -1,6 +1,8 @@
-This is a backend node server that returns a key.
+This is a backend node server that returns a key. The key/value pairs are stored in an .env-file.
 
-# .env-file
+I set this up because I didn't want my keys shown in the JS source code on the site.
+
+## .env-file
 
 The key and value pairs are stored in a .env-file.
 
@@ -16,7 +18,7 @@ Keys and values are listed one by one.
 
 `URL_NAME1=url1_value`
 
-# Fetch
+## Fetch
 
 ```javascript
 try {
@@ -36,8 +38,14 @@ try {
   }
 
   const data = await response.json();
-  const duration = performance.now() - startTime;
 } catch (error) {
   console.error(`Error fetching  ${type.toUpperCase()}: ${error}`);
 }
 ```
+
+## Return variables
+
+The server returns
+
+- `apiKey` : the value of the queried key
+- `duration` : the time it took to get the answer (with 4 decimals)
