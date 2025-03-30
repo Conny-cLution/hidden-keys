@@ -2,3 +2,4 @@
 api-logs.txt
 node_modules
 tmp
+.htaccess
