@@ -4,9 +4,11 @@ This is a backend node server that returns a key.
 
 The key and value pairs are stored in a .env-file.
 
-It contains the ACCESS_TOKEN=token_to_include_in_fetch_header that must be included in the server request
+It contains the ACCESS_TOKEN=token_to_include_in_fetch_header that must be included in the server request.
 
-Keys are listed one by one.
+- The value of the ACCESS_TOKEN is specified by you and can be a string of whatever.
+
+Keys and values are listed one by one.
 
 **It is important that the variable name starts with "KEY*" or "URL*".**
 
