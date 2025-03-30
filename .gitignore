@@ -1,5 +1,5 @@
 .env
 api-logs.txt
-node_modules
-tmp
+node_modules/
+tmp/
 .htaccess
