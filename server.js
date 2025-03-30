@@ -104,5 +104,5 @@ app.get('/get-key', authenticate, (req, res) => {
 });
 
 // Start server.
-// You might have to specify PORT as a first argument
+// PORT might need to be specified as a first argument
 app.listen(() => console.log(`Server is running (on port ${PORT})`));
